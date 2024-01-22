@@ -1,68 +1,68 @@
-# import random 
-# import math 
-# from Crypto.Util.number import inverse
-# from codecs import decode
-# def _checkforprime(number):
-#     if number<2:
-#         return False
-#     for i in range(2, number//2 +1):
-#         if number%i == 0:
-#             return False
-#     return True
+import random 
+import math 
+from Crypto.Util.number import inverse
+from codecs import decode
+def _checkforprime(number):
+    if number<2:
+        return False
+    for i in range(2, number//2 +1):
+        if number%i == 0:
+            return False
+    return True
 
-# def _generateprimenumbers(minvalue, maxvalue):
-#     primenumber = random.randint(minvalue, maxvalue)
-#     while not _checkforprime(primenumber):
-#         primenumber = random.randint(minvalue , maxvalue)
-#     return primenumber
+def _generateprimenumbers(minvalue, maxvalue):
+    primenumber = random.randint(minvalue, maxvalue)
+    while not _checkforprime(primenumber):
+        primenumber = random.randint(minvalue , maxvalue)
+    return primenumber
 
-# #for finding d 
-# def _findingmodinverse(e, phi):
-#     for d in range(3, phi):
-#         if (d*e) % phi == 1:
-#             return d
+#for finding d 
+def _findingmodinverse(e, phi):
+    for d in range(3, phi):
+        if (d*e) % phi == 1:
+            return d
     
-#     raise ValueError("NAH ID MODINVERSE")
+    raise ValueError("NAH ID MODINVERSE")
 
-# p, q = _generateprimenumbers(1000, 5000), _generateprimenumbers(10000, 50000)
+p, q = _generateprimenumbers(1000, 5000), _generateprimenumbers(10000, 50000)
 
-# while p == q:
-#     p = _generateprimenumbers(1000, 5000)
+while p == q:
+    p = _generateprimenumbers(1000, 5000)
 
-# n = p*q 
+n = p*q 
 
-# phiofn = (p-1)*(q-1)
+phiofn = (p-1)*(q-1)
 
-# e = random.randint(3, phiofn-1)
-# while math.gcd(e,phiofn) != 1:
-#     e = random.randint(3, phiofn)
+e = random.randint(3, phiofn-1)
+while math.gcd(e,phiofn) != 1:
+    e = random.randint(3, phiofn)
 
-# d = _findingmodinverse(e, phiofn)
+d = _findingmodinverse(e, phiofn)
 
-# print(f"GENERAL INFORMATION: \n{e} is the public key\n{d} is the private key\n{p,q}are the two prime numbers")
+print(f"GENERAL INFORMATION: \n{e} is the public key\n{d} is the private key\n{p,q}are the two prime numbers")
 
 
-# message = "EVERYTHING IN ITS RIGHT PLACE"
+message = "EVERYTHING IN ITS RIGHT PLACE"
 
-# #just encoded not encrypted
+#just encoded not encrypted
 
-# messageencoded=[ord(c) for c in message]
-# # print(messageencoded)
+messageencoded=[ord(c) for c in message]
+# print(messageencoded)
 
-# # c = m^d mod n
-# ciphertext = [pow(ch,e,n) for ch in messageencoded]
+# c = m^d mod n
+ciphertext = [pow(ch,e,n) for ch in messageencoded]
 
-# #print(ciphertext)
+#print(ciphertext)
 
-# #decrypt
+#decrypt
 
-# messageencoded = [pow(ch, d, n) for ch in ciphertext]
-# #print(messageencoded)
-# # message = "".join(chr(ch) for ch in messageencoded)
+messageencoded = [pow(ch, d, n) for ch in ciphertext]
+#print(messageencoded)
+# message = "".join(chr(ch) for ch in messageencoded)
 
-# for x in messageencoded:
-#     y = chr(x)
-#     print(y, end="")
+for x in messageencoded:
+    y = chr(x)
+    print(y, end="")
     
 '''TESTING RSA ON A COMPETITIVE EVENT QUESTION --> BOOT2ROOT CTF(CAPTURE THE FLAG 2018'''
 
